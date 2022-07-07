@@ -18,7 +18,8 @@
     <!-- Filter items container -->
     <div
       v-if="isItemsListOpen"
-      class="bg-white shadow-[0_2px_9px_rgba(0,0,0,0.053)] px-[24px] py-[16px] rounded-[5px]"
+      class="bg-white shadow-[0_2px_9px_rgba(0,0,0,0.053)] px-[24px] py-[16px] rounded-[5px]
+      absolute w-[200px]"
     >
       <div
         v-for="item in itemsList"
@@ -57,6 +58,7 @@ const isItemsListOpen = ref(false);
 const selectItem = (newSelectedItem) => {
   selectedItem.value = newSelectedItem;
   emit('region-filter', selectedItem.value);
+  isItemsListOpen.value = false;
 };
 
 /* Turn on or turn off items list */
