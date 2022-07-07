@@ -10,12 +10,16 @@
     <!-- === Main === -->
     <main>
       <!-- Section with all app search/filter tools -->
-      <section class="mx-[16px] mt-[24px]">
+      <section class="mx-[16px] mt-[24px] mb-[32px]">
         <SearchBar
           class="mb-[40px]"
           @searched-country="handleSearchedCountry"
         />
-        <RegionFilter @region-filter="handleRegionFilter" />
+
+        <RegionFilter
+          :items-list="['Africa', 'America', 'Asia', 'Europe', 'Oceania']"
+          @region-filter="handleRegionFilter"
+        />
       </section>
     </main>
   </div>
