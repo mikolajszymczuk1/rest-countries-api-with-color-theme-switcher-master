@@ -27,6 +27,11 @@ module.exports = {
     fontFamily: {
       nunito: ['"Nunito Sans"', 'sans-serif'],
     },
+    screens: {
+      sm: '650px',
+      md: '1024px',
+      lg: '1440px',
+    },
   },
   plugins: [],
 };
