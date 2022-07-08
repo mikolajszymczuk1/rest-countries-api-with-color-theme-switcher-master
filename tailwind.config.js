@@ -4,6 +4,7 @@ module.exports = {
     './index.html',
     './src/**/*.{vue,js,ts,jsx,tsx}',
   ],
+  darkMode: 'class',
   theme: {
     colors: {
       // Dark Blue (Dark Mode Elements): hsl(209, 23%, 22%)
