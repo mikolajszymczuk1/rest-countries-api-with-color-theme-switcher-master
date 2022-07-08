@@ -10,9 +10,12 @@
     <!-- === Main === -->
     <main>
       <!-- Section with all app search/filter tools -->
-      <section class="mx-[16px] mt-[24px] mb-[32px]">
+      <section
+        class="mx-[16px] mt-[24px] mb-[32px] sm:mx-[80px] md:mt-[48px] md:flex md:justify-between
+        md:items-center"
+      >
         <SearchBar
-          class="mb-[40px]"
+          class="mb-[40px] md:mb-0"
           @searched-country="handleSearchedCountry"
         />
 

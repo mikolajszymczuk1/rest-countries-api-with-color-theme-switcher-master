@@ -1,14 +1,16 @@
 <template>
   <!-- Region filter component -->
-  <div class="w-[200px]">
+  <div class="w-[200px] cursor-pointer">
     <!-- Selected item -->
     <div
-      class="bg-white rounded-[5px] relative text-very-dark-blue-b
-      text-[0.75em] shadow-[0_2px_9px_rgba(0,0,0,0.053)] mb-[4px] px-[24px] py-[14px]"
+      class="bg-white rounded-[5px] md:h-[56px] flex items-center relative text-very-dark-blue-b
+      md:text-[0.875rem] text-[0.75rem] shadow-[0_2px_9px_rgba(0,0,0,0.053)] mb-[4px]
+      px-[24px] py-[14px]"
       @click="toggleItemsList()"
     >
       <FilterIcon
-        class="absolute right-[19px] top-[50%] translate-y-[-50%]"
+        class="absolute right-[19px] top-[50%] translate-y-[-50%] md:w-[12px]
+        md:h-[12px] md:right-[22px]"
         :class="isItemsListOpen ? 'rotate-180' : ''"
       />
 
@@ -18,13 +20,13 @@
     <!-- Filter items container -->
     <div
       v-if="isItemsListOpen"
-      class="bg-white shadow-[0_2px_9px_rgba(0,0,0,0.053)] px-[24px] py-[16px] rounded-[5px]
-      absolute w-[200px]"
+      class="bg-white shadow-[0_2px_9px_rgba(0,0,0,0.053)] px-[24px] py-[16px] md:py-[18px]
+      rounded-[5px] absolute w-[200px]"
     >
       <div
         v-for="item in itemsList"
         :key="item"
-        class="text-[0.75em] mb-[8px] last:mb-0"
+        class="text-[0.75rem] mb-[8px] last:mb-0 md:text-[0.875rem]"
         @click="selectItem(item)"
       >
         {{ item }}
