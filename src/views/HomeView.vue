@@ -24,6 +24,11 @@
           @region-filter="handleRegionFilter"
         />
       </section>
+
+      <!-- Section with all countries cards -->
+      <section>
+        <CountryCard />
+      </section>
     </main>
   </div>
 </template>
@@ -32,6 +37,7 @@
 import NavigationBar from '@/components/NavigationBar.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import RegionFilter from '@/components/RegionFilter.vue';
+import CountryCard from '@/components/cards/CountryCard.vue';
 
 const handleSearchedCountry = (searchValue) => console.log(searchValue);
 const handleRegionFilter = (region) => console.log(region);
