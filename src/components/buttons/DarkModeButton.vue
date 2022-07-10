@@ -3,6 +3,7 @@
   <button
     class="flex justify-center items-center text-[0.75rem] font-semibold text-very-dark-blue-b
     sm:text-[0.85rem] lg:text-[1rem]"
+    data-test="dark-mode-button"
     @click="toggleDarkMode()"
   >
     <MoonIcon class="w-[16px] h-[16px] mr-[8px] lg:w-[20px] lg:h-[20px]" />
@@ -15,11 +16,11 @@ import { ref, onMounted } from 'vue';
 import MoonIcon from '@/components/icons/MoonIcon.vue';
 
 /* Dark mode active status */
-const isDarkModeActive = ref(false);
+const isDarkModeActive = ref('false');
 
 /* Based on idDarkModeActive set dark mode class on root html element */
 const setRootDarkModeClass = () => {
-  if (isDarkModeActive.value) {
+  if (isDarkModeActive.value === 'true') {
     document.documentElement.classList.add('dark');
   } else {
     document.documentElement.classList.remove('dark');
@@ -29,7 +30,7 @@ const setRootDarkModeClass = () => {
 /* Update current dark mode status */
 const updateDarkModeStatus = () => {
   if (!localStorage.getItem('darkMode')) {
-    localStorage.setItem('darkMode', false);
+    localStorage.setItem('darkMode', 'false');
   }
 
   isDarkModeActive.value = localStorage.getItem('darkMode');
@@ -38,7 +39,7 @@ const updateDarkModeStatus = () => {
 
 /* Change dark mode active status and update dark mode status in local storage */
 const toggleDarkMode = () => {
-  isDarkModeActive.value = !isDarkModeActive.value;
+  isDarkModeActive.value = isDarkModeActive.value === 'true' ? 'false' : 'true';
   localStorage.setItem('darkMode', isDarkModeActive.value);
   setRootDarkModeClass();
 };
