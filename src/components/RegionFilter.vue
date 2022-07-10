@@ -6,6 +6,7 @@
       class="bg-white rounded-[5px] md:h-[56px] flex items-center relative text-very-dark-blue-b
       md:text-[0.875rem] text-[0.75rem] shadow-[0_2px_9px_rgba(0,0,0,0.053)] mb-[4px]
       px-[24px] py-[14px]"
+      data-test="selected-region"
       @click="toggleItemsList()"
     >
       <FilterIcon
@@ -22,11 +23,13 @@
       v-if="isItemsListOpen"
       class="bg-white shadow-[0_2px_9px_rgba(0,0,0,0.053)] px-[24px] py-[16px] md:py-[18px]
       rounded-[5px] absolute w-[200px]"
+      data-test="filter-items-wrapper"
     >
       <div
         v-for="item in itemsList"
         :key="item"
         class="text-[0.75rem] mb-[8px] last:mb-0 md:text-[0.875rem]"
+        data-test="filter-item"
         @click="selectItem(item)"
       >
         {{ item }}
