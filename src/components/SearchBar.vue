@@ -17,6 +17,7 @@
       type="text"
       name="search-country"
       placeholder="Search for a country..."
+      data-test="search-country-input"
       @input="emitSearchedCountry()"
     >
   </div>
