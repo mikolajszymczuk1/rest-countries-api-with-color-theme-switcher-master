@@ -32,6 +32,15 @@ module.exports = {
       sm: '650px',
       md: '1024px',
       lg: '1440px',
+      xlg: '1600px',
+    },
+    extend: {
+      gridTemplateColumns: {
+        2: 'repeat(2, minmax(0, 264px))',
+        3: 'repeat(3, minmax(0, 264px))',
+        4: 'repeat(4, minmax(0, 264px))',
+        5: 'repeat(5, minmax(0, 264px))',
+      },
     },
   },
   plugins: [],
