@@ -12,7 +12,7 @@
       <!-- Section with all app search/filter tools -->
       <section
         class="mx-[16px] mt-[24px] mb-[32px] sm:mx-[80px] md:mt-[48px] md:flex md:justify-between
-        md:items-center"
+        md:items-center md:mb-[48px]"
       >
         <SearchBar
           class="mb-[40px] md:mb-0"
@@ -26,8 +26,22 @@
       </section>
 
       <!-- Section with all countries cards -->
-      <section>
-        <CountryCard />
+      <section
+        class="grid gap-y-[40px] grid-cols-1 justify-evenly md:justify-between
+        sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xlg:grid-cols-5 md:mx-[80px] lg:gap-y-[75px]"
+      >
+        <CountryCard
+          v-for="country in countriesStore.allCountries"
+          :key="country.name.common"
+          class="justify-self-center"
+          :card-data="{
+            name: country.name.common,
+            population: country.population,
+            region: country.region,
+            capital: country.capital[0],
+            flag: country.flags.svg,
+          }"
+        />
       </section>
     </main>
   </div>
@@ -38,7 +52,15 @@ import NavigationBar from '@/components/NavigationBar.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import RegionFilter from '@/components/RegionFilter.vue';
 import CountryCard from '@/components/cards/CountryCard.vue';
+import useCountriesStore from '@/stores/countriesStore';
+import { onMounted } from 'vue';
+
+/* Countries store declaration */
+const countriesStore = useCountriesStore();
 
 const handleSearchedCountry = (searchValue) => console.log(searchValue);
 const handleRegionFilter = (region) => console.log(region);
+
+/* When component is created, load all countries data to store state */
+onMounted(() => countriesStore.loadAllCountries());
 </script>
