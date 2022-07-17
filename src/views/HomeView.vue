@@ -20,7 +20,7 @@
         />
 
         <RegionFilter
-          :items-list="['Africa', 'America', 'Asia', 'Europe', 'Oceania']"
+          :items-list="['Africa', 'Americas', 'Asia', 'Europe', 'Oceania']"
           @region-filter="handleRegionFilter"
         />
       </section>
@@ -31,7 +31,7 @@
         sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xlg:grid-cols-5 md:mx-[80px] lg:gap-y-[75px]"
       >
         <CountryCard
-          v-for="country in countriesStore.allCountries"
+          v-for="country in countries"
           :key="country.name.common"
           class="justify-self-center"
           :card-data="{
@@ -53,13 +53,25 @@ import SearchBar from '@/components/SearchBar.vue';
 import RegionFilter from '@/components/RegionFilter.vue';
 import CountryCard from '@/components/cards/CountryCard.vue';
 import useCountriesStore from '@/stores/countriesStore';
-import { onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 
 /* Countries store declaration */
 const countriesStore = useCountriesStore();
 
-const handleSearchedCountry = (searchValue) => console.log(searchValue);
-const handleRegionFilter = (region) => console.log(region);
+/* Variable that store information about what countries are searched */
+const searchedCountryName = ref('');
+
+/* Set new searched country variable value */
+const handleSearchedCountry = (searchValue) => { searchedCountryName.value = searchValue; };
+
+/* Set new filter region */
+const handleRegionFilter = (region) => countriesStore.setFilterRegion(region);
+
+/* Return filtered countries (By region and by name) */
+const countries = computed(() => {
+  const countriesByRegion = countriesStore.getCountriesByRegion;
+  return countriesStore.getCountriesByName(countriesByRegion, searchedCountryName.value);
+});
 
 /* When component is created, load all countries data to store state */
 onMounted(() => countriesStore.loadAllCountries());
