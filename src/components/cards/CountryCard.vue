@@ -8,25 +8,38 @@
     <div
       class="w-[100%] h-[160px] bg-no-repeat bg-cover bg-center"
       :style="`background-image: url('${cardData.flag}')`"
+      data-test="country-flag"
     />
 
     <!-- Card basic information -->
     <div class="font-nunito px-[24px] pt-[24px] pb-[46px] dark:text-white">
-      <h2 class="font-extrabold text-very-dark-blue-b text-[1.125rem] mb-[16px] dark:text-white">
+      <h2
+        class="font-extrabold text-very-dark-blue-b text-[1.125rem] mb-[16px] dark:text-white"
+        data-test="country-name"
+      >
         {{ cardData.name }}
       </h2>
 
-      <p class="text-[0.875rem]">
+      <p
+        class="text-[0.875rem]"
+        data-test="country-population"
+      >
         <span class="font-semibold">Population:</span>
         {{ population }}
       </p>
 
-      <p class="text-[0.875rem]">
+      <p
+        class="text-[0.875rem]"
+        data-test="country-region"
+      >
         <span class="font-semibold">Region:</span>
         {{ cardData.region }}
       </p>
 
-      <p class="text-[0.875rem]">
+      <p
+        class="text-[0.875rem]"
+        data-test="country-capital"
+      >
         <span class="font-semibold">Capital:</span>
         {{ cardData.capital }}
       </p>
