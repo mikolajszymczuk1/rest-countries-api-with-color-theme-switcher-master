@@ -6,7 +6,6 @@ module.exports = {
     'eslint:recommended',
     'plugin:vue/recommended',
     'airbnb-base',
-    'plugin:jest/recommended',
   ],
   parserOptions: {
     parser: '@babel/eslint-parser',
