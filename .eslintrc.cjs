@@ -6,6 +6,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:vue/recommended',
     'airbnb-base',
+    'plugin:jest/recommended',
   ],
   parserOptions: {
     parser: '@babel/eslint-parser',
@@ -24,6 +25,9 @@ module.exports = {
       },
     },
   },
+  plugins: [
+    'jest',
+  ],
   overrides: [
     {
       files: [
@@ -31,11 +35,7 @@ module.exports = {
       ],
       extends: [
         'plugin:cypress/recommended',
-        'jest',
       ],
-      env: {
-        'jest/globals': true,
-      },
     },
   ],
 };
