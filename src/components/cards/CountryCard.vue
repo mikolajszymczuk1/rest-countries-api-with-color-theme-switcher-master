@@ -18,7 +18,7 @@
 
       <p class="text-[0.875rem]">
         <span class="font-semibold">Population:</span>
-        {{ cardData.population }}
+        {{ population }}
       </p>
 
       <p class="text-[0.875rem]">
@@ -35,7 +35,9 @@
 </template>
 
 <script setup>
-defineProps({
+import { computed } from 'vue';
+
+const props = defineProps({
   cardData: {
     type: Object,
     required: true,
@@ -48,4 +50,7 @@ defineProps({
     },
   },
 });
+
+/* Format population value by add commas */
+const population = computed(() => props.cardData.population.toLocaleString());
 </script>
