@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-
 /* Api urls */
 const basicApiUrl = 'https://restcountries.com/v3.1';
 const allCountriesUrl = `${basicApiUrl}/all?fields=name,population,region,capital,flags`;
@@ -8,10 +7,30 @@ const allCountriesUrl = `${basicApiUrl}/all?fields=name,population,region,capita
 const useCountriesStore = defineStore({
   id: 'countries',
   state: () => ({
-    allCountries: null, // Array with all countries
+    allCountries: [], // Array with all countries (after all filters)
     currentCountry: null, // Object with information about clicked country card
+    currentRegion: 'all',
   }),
+  getters: {
+    /* Return countries filtered by region */
+    getCountriesByRegion: (state) => {
+      if (state.currentRegion === 'all') return state.allCountries;
+      return state.allCountries.filter((country) => country.region === state.currentRegion);
+    },
+
+    /* Return countries filtered by name */
+    getCountriesByName: () => (arr, countryName) => arr.filter((country) => {
+      const regexCountryName = new RegExp(`${countryName}`, 'i');
+      const result = country.name.common.match(regexCountryName);
+      return (result && result.index === 0);
+    }),
+  },
   actions: {
+    /* Method set new current filter region */
+    setFilterRegion(newRegion) {
+      this.currentRegion = newRegion;
+    },
+
     /* Get all countries from Country API */
     async loadAllCountries() {
       await fetch(allCountriesUrl)
