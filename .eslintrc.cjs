@@ -31,7 +31,11 @@ module.exports = {
       ],
       extends: [
         'plugin:cypress/recommended',
+        'jest',
       ],
+      env: {
+        'jest/globals': true,
+      },
     },
   ],
 };
