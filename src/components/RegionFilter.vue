@@ -5,7 +5,7 @@
     <div
       class="bg-white rounded-[5px] md:h-[56px] flex items-center relative text-very-dark-blue-b
       md:text-[0.875rem] text-[0.75rem] shadow-[0_2px_9px_rgba(0,0,0,0.053)] mb-[4px]
-      px-[24px] py-[14px]"
+      px-[24px] py-[14px] dark:bg-dark-blue dark:text-white"
       data-test="selected-region"
       @click="toggleItemsList()"
     >
@@ -22,7 +22,7 @@
     <div
       v-if="isItemsListOpen"
       class="bg-white shadow-[0_2px_9px_rgba(0,0,0,0.053)] px-[24px] py-[16px] md:py-[18px]
-      rounded-[5px] absolute w-[200px]"
+      rounded-[5px] absolute w-[200px] dark:bg-dark-blue dark:text-white"
       data-test="filter-items-wrapper"
     >
       <div

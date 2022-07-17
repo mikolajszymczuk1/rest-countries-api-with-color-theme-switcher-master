@@ -2,7 +2,7 @@
   <!-- Dark mode button component -->
   <button
     class="flex justify-center items-center text-[0.75rem] font-semibold text-very-dark-blue-b
-    sm:text-[0.85rem] lg:text-[1rem]"
+    sm:text-[0.85rem] lg:text-[1rem] dark:text-white"
     data-test="dark-mode-button"
     @click="toggleDarkMode()"
   >

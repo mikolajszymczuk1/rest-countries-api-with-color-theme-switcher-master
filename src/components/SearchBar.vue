@@ -13,7 +13,7 @@
       v-model.trim="searchedCountry"
       class="w-[100%] h-[100%] text-very-dark-blue-b placeholder:text-[0.75rem]
       md:placeholder:text-[0.875rem] placeholder:text-dark-gray/[0.5] outline-0
-      pl-[74px] pr-[25px] bg-white"
+      pl-[74px] pr-[25px] bg-white dark:text-white dark:placeholder:text-white dark:bg-dark-blue"
       type="text"
       name="search-country"
       placeholder="Search for a country..."

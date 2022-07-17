@@ -8,6 +8,7 @@
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
+      class="dark:fill-white"
       fill-rule="evenodd"
       clip-rule="evenodd"
       d="M11.1111 9.77778H10.4L10.1333 9.51111C11.0222 8.53333 11.5556 7.2 11.5556
