@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+
 /* Api urls */
 const basicApiUrl = 'https://restcountries.com/v3.1';
 const allCountriesUrl = `${basicApiUrl}/all?fields=name,population,region,capital,flags`;
