@@ -12,7 +12,7 @@
       <FilterIcon
         class="absolute right-[19px] top-[50%] translate-y-[-50%] md:w-[12px]
         md:h-[12px] md:right-[22px]"
-        :class="isItemsListOpen ? 'rotate-180' : ''"
+        :class="isItemsListOpen ? '' : 'rotate-180'"
       />
 
       {{ selectedItem === '' ? 'Filter by Region' : selectedItem }}
