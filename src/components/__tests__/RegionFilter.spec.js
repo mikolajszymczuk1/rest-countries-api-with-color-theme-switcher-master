@@ -3,49 +3,59 @@ import { mount } from '@vue/test-utils';
 import RegionFilter from '@/components/RegionFilter.vue';
 
 describe('RegionFilter.vue', () => {
+  let wrapper;
+
+  // Helpers
+  const findAllFilterItems = () => wrapper.findAll('[data-test=filter-item]');
+  const findSelectedRegion = () => wrapper.find('[data-test=selected-region]');
+  const findFilterItemsWrapper = () => wrapper.find('[data-test=filter-items-wrapper]');
+
+  // Component factory
+  const createComponent = (options = null) => {
+    wrapper = mount(RegionFilter, options);
+  };
+
   it('Should has correct default values', () => {
-    const wrapper = mount(RegionFilter, {
+    createComponent({
       props: {
         itemsList: ['testItem0', 'testItem1', 'testItem2'],
       },
     });
 
-    const filterItems = wrapper.findAll('[data-test=filter-item]');
-    expect(wrapper.find('[data-test=selected-region]').text()).toBe('Filter by Region');
-    filterItems.forEach((item, index) => expect(item.text()).toBe(`testItem${index}`));
+    expect(findSelectedRegion().text()).toBe('Filter by Region');
+    findAllFilterItems().forEach((item, index) => expect(item.text()).toBe(`testItem${index}`));
   });
 
   it('After click on region filter, should activate regions menu', async () => {
-    const wrapper = mount(RegionFilter, {
+    createComponent({
       props: {
         itemsList: ['testItem0', 'testItem1', 'testItem2'],
       },
     });
 
-    const selectedRegion = wrapper.find('[data-test=selected-region]');
-    expect(wrapper.find('[data-test=filter-items-wrapper]').exists()).toBeFalsy();
-    await selectedRegion.trigger('click');
-    expect(wrapper.find('[data-test=filter-items-wrapper]').exists()).toBeTruthy();
+    expect(findFilterItemsWrapper().exists()).toBeFalsy();
+    await findSelectedRegion().trigger('click');
+    expect(findFilterItemsWrapper().exists()).toBeTruthy();
   });
 
   it('After click on region name, should set clicked region as selected region', async () => {
-    const testRegion = async (wrapper, items, itemIndexToTest) => {
+    const testRegion = async (items, itemIndexToTest) => {
       expect(items[itemIndexToTest].text()).toBe(`testItem${itemIndexToTest}`);
       await items[itemIndexToTest].trigger('click');
-      expect(wrapper.find('[data-test=selected-region]').text()).toBe(`testItem${itemIndexToTest}`);
+      expect(findSelectedRegion().text()).toBe(`testItem${itemIndexToTest}`);
     };
 
-    const wrapper = mount(RegionFilter, {
+    createComponent({
       props: {
         itemsList: ['testItem0', 'testItem1', 'testItem2'],
       },
     });
 
-    await wrapper.find('[data-test=selected-region]').trigger('click');
-    const filterItems = wrapper.findAll('[data-test=filter-item]');
-    expect(wrapper.find('[data-test=filter-items-wrapper]').exists()).toBeTruthy();
-    await testRegion(wrapper, filterItems, 0);
-    await testRegion(wrapper, filterItems, 1);
-    await testRegion(wrapper, filterItems, 2);
+    await findSelectedRegion().trigger('click');
+    const filterItems = findAllFilterItems();
+    expect(findFilterItemsWrapper().exists()).toBeTruthy();
+    await testRegion(filterItems, 0);
+    await testRegion(filterItems, 1);
+    await testRegion(filterItems, 2);
   });
 });

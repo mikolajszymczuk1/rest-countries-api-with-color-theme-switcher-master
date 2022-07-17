@@ -3,9 +3,19 @@ import { mount } from '@vue/test-utils';
 import SearchBar from '@/components/SearchBar.vue';
 
 describe('SearchBar.vue', () => {
+  let wrapper;
+
+  // Helpers
+  const findSearchCountryInput = () => wrapper.find('[data-test=search-country-input]');
+
+  // Component factory
+  const createComponent = (options = null) => {
+    wrapper = mount(SearchBar, options);
+  };
+
   it('Two binding data should works correctly between text input and component variable', async () => {
-    const wrapper = mount(SearchBar);
-    const searchInput = wrapper.find('[data-test=search-country-input]');
+    createComponent();
+    const searchInput = findSearchCountryInput();
     expect(searchInput.element.value).toBe('');
     expect(wrapper.vm.searchedCountry).toBe('');
     searchInput.setValue('test');
@@ -17,8 +27,8 @@ describe('SearchBar.vue', () => {
   });
 
   it('On input component should emits custom event that contains input value', () => {
-    const wrapper = mount(SearchBar);
-    wrapper.find('[data-test=search-country-input]').setValue('test');
+    createComponent();
+    findSearchCountryInput().setValue('test');
     expect(wrapper.emitted('searched-country')[0]).toEqual(['test']);
   });
 });
