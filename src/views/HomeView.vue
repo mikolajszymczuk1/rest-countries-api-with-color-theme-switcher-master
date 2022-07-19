@@ -72,7 +72,7 @@ const handleSearchedCountry = (searchValue) => { searchedCountryName.value = sea
 /* Set new filter region */
 const handleRegionFilter = (region) => countriesStore.setFilterRegion(region);
 
-/*  */
+/* Redirect user to clicked country card's details page */
 const handleCountryClicked = (countryName) => router.push(
   { name: 'details', params: { country: countryName } },
 );
