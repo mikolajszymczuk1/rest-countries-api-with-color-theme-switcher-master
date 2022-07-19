@@ -45,7 +45,7 @@ const useCountriesStore = defineStore({
     async loadNewCurrentCountry(countryName) {
       await fetch(`${currentCountryUrl}/${countryName}`)
         .then((res) => res.json())
-        .then((data) => { [this.currentCountry] = data; console.log(data[0]); })
+        .then((data) => { [this.currentCountry] = data; })
         .catch(() => { this.currentCountry = {}; });
     },
   },
