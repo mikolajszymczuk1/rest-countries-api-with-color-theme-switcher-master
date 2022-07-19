@@ -41,6 +41,7 @@
             capital: country.capital[0],
             flag: country.flags.svg,
           }"
+          @country-clicked="handleCountryClicked"
         />
       </section>
     </main>
@@ -48,15 +49,19 @@
 </template>
 
 <script setup>
+import { ref, computed, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import NavigationBar from '@/components/NavigationBar.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import RegionFilter from '@/components/RegionFilter.vue';
 import CountryCard from '@/components/cards/CountryCard.vue';
 import useCountriesStore from '@/stores/countriesStore';
-import { ref, computed, onMounted } from 'vue';
 
 /* Countries store declaration */
 const countriesStore = useCountriesStore();
+
+/* Router initialization */
+const router = useRouter();
 
 /* Variable that store information about what countries are searched */
 const searchedCountryName = ref('');
@@ -66,6 +71,11 @@ const handleSearchedCountry = (searchValue) => { searchedCountryName.value = sea
 
 /* Set new filter region */
 const handleRegionFilter = (region) => countriesStore.setFilterRegion(region);
+
+/*  */
+const handleCountryClicked = (countryName) => router.push(
+  { name: 'details', params: { country: countryName } },
+);
 
 /* Return filtered countries (By region and by name) */
 const countries = computed(() => {

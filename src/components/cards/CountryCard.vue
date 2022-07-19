@@ -3,6 +3,7 @@
   <div
     class="w-[264px] rounded-[5px] overflow-hidden shadow-[0_0_7px_2px_rgba(0,0,0,0.03)]
     dark:bg-dark-blue"
+    @click="clickedEmit()"
   >
     <!-- Card country flag -->
     <div
@@ -50,6 +51,7 @@
 <script setup>
 import { computed } from 'vue';
 
+/* Props declarations */
 const props = defineProps({
   cardData: {
     type: Object,
@@ -63,6 +65,12 @@ const props = defineProps({
     },
   },
 });
+
+/* Emits declarations */
+const emit = defineEmits(['country-clicked']);
+
+/* Emit custom event when user click the country card */
+const clickedEmit = () => emit('country-clicked', props.cardData.name.toLowerCase());
 
 /* Format population value by add commas */
 const population = computed(() => props.cardData.population.toLocaleString());
