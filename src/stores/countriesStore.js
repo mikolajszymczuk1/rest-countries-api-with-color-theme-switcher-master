@@ -3,6 +3,7 @@ import { defineStore } from 'pinia';
 /* Api urls */
 const basicApiUrl = 'https://restcountries.com/v3.1';
 const allCountriesUrl = `${basicApiUrl}/all?fields=name,population,region,capital,flags`;
+const currentCountryUrl = `${basicApiUrl}/name`;
 
 /* Countries store */
 const useCountriesStore = defineStore({
@@ -38,6 +39,14 @@ const useCountriesStore = defineStore({
         .then((res) => res.json())
         .then((data) => { this.allCountries = data; })
         .catch(() => { this.allCountries = []; });
+    },
+
+    /* Get information about country with name = 'countryName' */
+    async loadNewCurrentCountry(countryName) {
+      await fetch(`${currentCountryUrl}/${countryName}`)
+        .then((res) => res.json())
+        .then((data) => { [this.currentCountry] = data; console.log(data[0]); })
+        .catch(() => { this.currentCountry = {}; });
     },
   },
 });
