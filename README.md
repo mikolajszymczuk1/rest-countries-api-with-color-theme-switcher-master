@@ -35,8 +35,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Solution]()
-- Live Site URL: [Live]()
+- Solution URL: [Solution](https://www.frontendmentor.io/solutions/vue-3-compositionapi-tailwindcss-pinia-vue-router-5is1IiuBYE)
+- Live Site URL: [Live](https://delicate-lollipop-e8af06.netlify.app/)
 
 ## My process
 
