@@ -15,9 +15,23 @@ const router = createRouter({
       path: '/details/:country',
       name: 'details',
       component: DetailsView,
-      beforeEnter: async (to) => { // Get data from api before render component
+      beforeEnter: async (to, from, next) => { // Get data from api before render component
         const countriesStore = useCountriesStore();
-        await countriesStore.loadNewCurrentCountry(to.params.country);
+        let canEnter = false;
+
+        for (let i = 0; i < countriesStore.getAllCountriesNames.length; i += 1) {
+          if (to.params.country === countriesStore.getAllCountriesNames[i]) {
+            canEnter = true;
+            break;
+          }
+        }
+
+        if (canEnter) {
+          await countriesStore.loadNewCurrentCountry(to.params.country);
+          next();
+        } else {
+          next({ name: 'home' });
+        }
       },
     },
     {
