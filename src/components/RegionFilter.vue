@@ -39,7 +39,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import useCountriesStore from '@/stores/countriesStore';
 import FilterIcon from '@/components/icons/FilterIcon.vue';
 
 /* Props declaration */
@@ -52,6 +53,9 @@ defineProps({
 
 /* Emits declaration */
 const emit = defineEmits(['region-filter']);
+
+/* Init countries store */
+const countriesStore = useCountriesStore();
 
 /* Selected item */
 const selectedItem = ref('');
@@ -68,4 +72,10 @@ const selectItem = (newSelectedItem) => {
 
 /* Turn on or turn off items list */
 const toggleItemsList = () => { isItemsListOpen.value = !isItemsListOpen.value; };
+
+/* When component is created, load current region information from store */
+onMounted(() => {
+  if (countriesStore.currentRegion === 'all') return;
+  selectedItem.value = countriesStore.currentRegion;
+});
 </script>
