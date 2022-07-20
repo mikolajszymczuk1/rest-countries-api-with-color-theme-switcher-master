@@ -8,35 +8,45 @@
     </header>
 
     <!-- === Main === -->
-    <main>
+    <main class="xlg:w-[70%] xlg:mx-auto">
       <!-- Go back button section -->
-      <section class="pl-[28px] pt-[40px] pb-[64px]">
+      <section class="pl-[28px] pt-[40px] pb-[64px] lg:pl-[80px] lg:py-[80px]">
         <RouterLink
           to="/"
           class="flex justify-center items-center shadow-[0_0_7px_0_rgba(0,0,0,0.3)]
-          px-[23px] py-[6px] w-[104px] dark:text-white dark:bg-dark-blue rounded-[2px]"
+          py-[6px] w-[104px] dark:text-white dark:bg-dark-blue rounded-[2px]
+          lg:rounded-[10px] lg:py-[10px] lg:w-[136px] dark:shadow-none"
         >
-          <ArrowIcon class="mr-[8px]" />
+          <ArrowIcon class="mr-[8px] lg:w-[20px] lg:h-[20px]" />
           Back
         </RouterLink>
       </section>
 
       <!-- Country details section -->
-      <section class="px-[28px] pb-[60px]">
+      <section
+        class="px-[28px] pb-[60px] sm:px-[15%] md:flex md:justify-around
+        md:px-[28px] md:items-center md:pb-0 lg:justify-between lg:px-[80px]
+        dark:text-white"
+      >
         <!-- Country big image -->
         <div
-          class="bg-no-repeat bg-cover bg-center w-[100%] h-[229px] rounded-[5px] mb-[44px]"
+          class="bg-no-repeat bg-cover bg-center w-[100%] h-[229px] rounded-[5px] mb-[44px]
+          md:w-[560px] md:h-[300px] md:mb-0 md:mr-[60px] lg:h-[401px] lg:mr-[120px]
+          lg:rounded-[10px]"
           :style="`background-image: url(${countryDetails.flag});`"
         />
 
         <!-- Country info -->
         <article>
-          <h1 class="font-nunito font-extrabold text-[1.375rem] mb-[16px]">
+          <h1
+            class="font-nunito font-extrabold text-[1.375rem] mb-[16px] sm:mb-[23px]
+            lg:text-[2rem]"
+          >
             {{ countryDetails.name }}
           </h1>
 
-          <div class="mb-[34px] font-nunito text-[0.875rem]">
-            <div class="mb-[32px]">
+          <div class="mb-[34px] font-nunito text-[0.875rem] sm:flex lg:text-[1rem] lg:mb-[68px]">
+            <div class="mb-[32px] sm:mb-0 sm:mr-[117px] lg:mr-[141px]">
               <p class="mb-[10px]">
                 <span class="font-semibold">Native Name:</span>
                 {{ countryDetails.nativeName }}
@@ -85,14 +95,14 @@
             </div>
           </div>
 
-          <div class="flex flex-col">
-            <span class="mb-[16px]">Border Countries:</span>
-            <div class="flex">
+          <div class="flex flex-col sm:flex-row sm:items-center">
+            <span class="mb-[16px] sm:mb-0 sm:mr-[16px]">Border Countries:</span>
+            <div class="flex flex-wrap">
               <div
                 v-for="borderCountry in countryDetails.bordersCountries"
                 :key="borderCountry"
                 class="font-nunito text-[0.75rem] mr-[10px] px-[15px] py-[6px]
-                shadow-[0_0_4px_1px_rgba(0,0,0,0.11)]"
+                shadow-[0_0_4px_1px_rgba(0,0,0,0.11)] lg:text-[0.875rem] dark:bg-dark-blue"
               >
                 {{ borderCountry }}
               </div>
