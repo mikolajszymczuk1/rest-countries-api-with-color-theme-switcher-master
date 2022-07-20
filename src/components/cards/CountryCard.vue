@@ -3,6 +3,7 @@
   <div
     class="w-[264px] rounded-[5px] overflow-hidden shadow-[0_0_7px_2px_rgba(0,0,0,0.03)]
     dark:bg-dark-blue cursor-pointer"
+    data-test="country-card"
     @click="clickedEmit()"
   >
     <!-- Card country flag -->
