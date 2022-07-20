@@ -28,7 +28,8 @@
       <!-- Section with all countries cards -->
       <section
         class="grid gap-y-[40px] grid-cols-1 justify-evenly md:justify-between
-        sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xlg:grid-cols-5 md:mx-[80px] lg:gap-y-[75px]"
+        sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xlg:grid-cols-5 md:mx-[80px] lg:gap-y-[75px]
+        pb-[65px] lg:pb-[45px]"
       >
         <CountryCard
           v-for="country in countries"
@@ -49,7 +50,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import NavigationBar from '@/components/NavigationBar.vue';
 import SearchBar from '@/components/SearchBar.vue';
@@ -82,7 +83,4 @@ const countries = computed(() => {
   const countriesByRegion = countriesStore.getCountriesByRegion;
   return countriesStore.getCountriesByName(countriesByRegion, searchedCountryName.value);
 });
-
-/* When component is created, load all countries data to store state */
-onMounted(() => countriesStore.loadAllCountries());
 </script>
