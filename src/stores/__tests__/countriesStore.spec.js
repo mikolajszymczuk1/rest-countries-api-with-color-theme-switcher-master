@@ -22,6 +22,14 @@ const mockCountries = [];
   });
 });
 
+const mockCurrentCountry = {
+  capital: ['testCapital0'],
+  flags: { svg: 'test/icon0' },
+  name: { common: 'testName0' },
+  population: 0,
+  region: 'Africa',
+};
+
 // Mock fetch function
 global.fetch = vi.fn(() => Promise.resolve({
   json: () => Promise.resolve(mockCountries),
@@ -72,6 +80,15 @@ describe('Countries Store', () => {
         population: 200,
       }]);
     });
+
+    it('getAllCountriesNames should return all countries names', async () => {
+      const countriesStore = useCountriesStore();
+      await countriesStore.loadAllCountries();
+      expect(countriesStore.getAllCountriesNames.length).toBe(mockCountries.length);
+      countriesStore.getAllCountriesNames.forEach((el, index) => {
+        expect(el).toBe(mockCountries[index].name.common.toLowerCase());
+      });
+    });
   });
 
   describe('Actions', () => {
@@ -97,6 +114,19 @@ describe('Countries Store', () => {
         await countriesStore.loadAllCountries();
         expect(countriesStore.allCountries).toEqual([]);
       });
+    });
+
+    it('loadNewCurrentCountry should load data for selected country', async () => {
+      const countriesStore = useCountriesStore();
+      await countriesStore.loadNewCurrentCountry('testName1');
+      expect(countriesStore.currentCountry).toEqual(mockCurrentCountry);
+    });
+
+    it('if cant load data from api, should set empty object in state variable', async () => {
+      fetch.mockRejectedValueOnce(new Error('Can not load data from API'));
+      const countriesStore = useCountriesStore();
+      await countriesStore.loadNewCurrentCountry('testName0');
+      expect(countriesStore.currentCountry).toEqual({});
     });
   });
 });

@@ -15,6 +15,7 @@ describe('CountryCard.vue', () => {
   let wrapper;
 
   // Helpers
+  const findCountryComponent = () => wrapper.find('[data-test=country-card]');
   const findCountryFlag = () => wrapper.find('[data-test=country-flag]');
   const findCountryName = () => wrapper.find('[data-test=country-name]');
   const findCountryPopulation = () => wrapper.find('[data-test=country-population]');
@@ -33,5 +34,16 @@ describe('CountryCard.vue', () => {
     expect(findCountryPopulation().text()).toBe('Population: 83,524,522');
     expect(findCountryRegion().text()).toBe('Region: testRegion');
     expect(findCountryCapital().text()).toBe('Capital: testCapital');
+  });
+
+  it('After click component, should emit custom event', async () => {
+    createComponent({
+      props: {
+        cardData: mockCardData,
+      },
+    });
+
+    await findCountryComponent().trigger('click');
+    expect(wrapper.emitted('country-clicked')[0]).toEqual(['testname']);
   });
 });

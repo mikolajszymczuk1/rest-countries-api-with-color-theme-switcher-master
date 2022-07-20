@@ -1,5 +1,12 @@
-import { describe, it, expect } from 'vitest';
+import {
+  describe,
+  it,
+  expect,
+  vi,
+} from 'vitest';
+
 import { mount } from '@vue/test-utils';
+import { createTestingPinia } from '@pinia/testing';
 import RegionFilter from '@/components/RegionFilter.vue';
 
 describe('RegionFilter.vue', () => {
@@ -20,6 +27,9 @@ describe('RegionFilter.vue', () => {
       props: {
         itemsList: ['testItem0', 'testItem1', 'testItem2'],
       },
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
     });
 
     expect(findSelectedRegion().text()).toBe('Filter by Region');
@@ -30,6 +40,9 @@ describe('RegionFilter.vue', () => {
     createComponent({
       props: {
         itemsList: ['testItem0', 'testItem1', 'testItem2'],
+      },
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
     });
 
@@ -43,11 +56,15 @@ describe('RegionFilter.vue', () => {
       expect(items[itemIndexToTest].text()).toBe(`testItem${itemIndexToTest}`);
       await items[itemIndexToTest].trigger('click');
       expect(findSelectedRegion().text()).toBe(`testItem${itemIndexToTest}`);
+      expect(wrapper.emitted('region-filter')[itemIndexToTest]).toEqual([`testItem${itemIndexToTest}`]);
     };
 
     createComponent({
       props: {
         itemsList: ['testItem0', 'testItem1', 'testItem2'],
+      },
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
     });
 
@@ -57,5 +74,26 @@ describe('RegionFilter.vue', () => {
     await testRegion(filterItems, 0);
     await testRegion(filterItems, 1);
     await testRegion(filterItems, 2);
+  });
+
+  it('If currentRegion in store has some region value set, should load this value to filter', async () => {
+    createComponent({
+      props: {
+        itemsList: ['testItem0', 'testItem1', 'testItem2'],
+      },
+      global: {
+        plugins: [
+          createTestingPinia({
+            createSpy: vi.fn,
+            initialState: {
+              countries: { currentRegion: 'Asia' },
+            },
+          }),
+        ],
+      },
+    });
+
+    await wrapper.vm.$nextTick();
+    expect(findSelectedRegion().text()).toBe('Asia');
   });
 });
