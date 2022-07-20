@@ -26,6 +26,11 @@ const useCountriesStore = defineStore({
       const result = country.name.common.match(regexCountryName);
       return (result && result.index === 0);
     }),
+
+    /* Return all countries names */
+    getAllCountriesNames: (state) => state.allCountries.map(
+      (country) => country.name.common.toLowerCase(),
+    ),
   },
   actions: {
     /* Method set new current filter region */
