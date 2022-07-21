@@ -116,17 +116,19 @@ describe('Countries Store', () => {
       });
     });
 
-    it('loadNewCurrentCountry should load data for selected country', async () => {
-      const countriesStore = useCountriesStore();
-      await countriesStore.loadNewCurrentCountry('testName1');
-      expect(countriesStore.currentCountry).toEqual(mockCurrentCountry);
-    });
+    describe('loadNewCurrentCountry action', () => {
+      it('should load data for selected country', async () => {
+        const countriesStore = useCountriesStore();
+        await countriesStore.loadNewCurrentCountry('testName1');
+        expect(countriesStore.currentCountry).toEqual(mockCurrentCountry);
+      });
 
-    it('if cant load data from api, should set empty object in state variable', async () => {
-      fetch.mockRejectedValueOnce(new Error('Can not load data from API'));
-      const countriesStore = useCountriesStore();
-      await countriesStore.loadNewCurrentCountry('testName0');
-      expect(countriesStore.currentCountry).toEqual({});
+      it('if cant load data from api, should set empty object in state variable', async () => {
+        fetch.mockRejectedValueOnce(new Error('Can not load data from API'));
+        const countriesStore = useCountriesStore();
+        await countriesStore.loadNewCurrentCountry('testName0');
+        expect(countriesStore.currentCountry).toEqual({});
+      });
     });
   });
 });
