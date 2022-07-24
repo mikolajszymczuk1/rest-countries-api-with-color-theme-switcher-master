@@ -17,6 +17,12 @@ const router = createRouter({
       component: DetailsView,
       beforeEnter: async (to, from, next) => { // Get data from api before render component
         const countriesStore = useCountriesStore();
+
+        // If user enter to the path directly, load all countries
+        if (countriesStore.allCountries.length === 0) {
+          await countriesStore.loadAllCountries();
+        }
+
         let canEnter = false;
 
         for (let i = 0; i < countriesStore.getAllCountriesNames.length; i += 1) {
