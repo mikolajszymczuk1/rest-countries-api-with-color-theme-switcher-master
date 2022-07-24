@@ -13,5 +13,8 @@ import useCountriesStore from '@/stores/countriesStore';
 const countriesStore = useCountriesStore();
 
 /* When component is created, load all countries data to store state */
-onMounted(() => countriesStore.loadAllCountries());
+onMounted(() => {
+  if (countriesStore.allCountries.length !== 0) return;
+  countriesStore.loadAllCountries();
+});
 </script>
